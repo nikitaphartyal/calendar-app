@@ -1,6 +1,6 @@
 // app/api/[id]/route.ts
 
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest  } from "next/server";
 import prisma from "@/lib/prisma"; 
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/authOptions";
@@ -8,7 +8,7 @@ import { authOptions } from "@/lib/authOptions";
 
 
 // PUT (Update Event)
-export async function PUT(req: Request, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
     const session = await getServerSession(authOptions);
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -53,7 +53,7 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
   
   
   // DELETE (Delete Event)
-  export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+  export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
     const session = await getServerSession(authOptions);
     if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
