@@ -2,9 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/authOptions";
 import prisma from "@/lib/prisma";
-import type { NextApiRequestContext } from "next";
 
-export async function PUT(req: NextRequest, context: NextApiRequestContext) {
+export async function PUT(req: NextRequest, context: { params: { id: string } }) {
   const session = await getServerSession(authOptions);
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
